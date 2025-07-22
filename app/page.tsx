@@ -4,6 +4,7 @@ import { useApp } from '@/context/AppContext';
 import Header from '@/components/Header';
 import SidebarMenu from '@/components/SidebarMenu';
 import ChatFooter from '@/components/ChatFooter';
+import PWAInstaller from '@/components/PWAInstaller';
 import TodayView from '@/components/TodayView';
 import MedicationsView from '@/components/MedicationsView';
 import SleepView from '@/components/SleepView';
@@ -88,6 +89,9 @@ export default function Home() {
         onVoiceToggle={handleVoiceToggle}
         isRecording={isRecording}
       />
+      
+      {/* PWA Install Prompt */}
+      <PWAInstaller />
     </main>
   );
 }
