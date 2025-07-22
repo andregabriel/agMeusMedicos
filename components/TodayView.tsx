@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatTime, formatDateBR, isToday } from '@/utils/dateHelpers';
-import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon } from 'lucide-react';
+import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon, PillIcon } from 'lucide-react';
 import AlarmModal from './AlarmModal';
 import DemoData from './DemoData';
 import { motion } from 'framer-motion';
