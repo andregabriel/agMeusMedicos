@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply min-h-screen bg-gradient-to-br from-zen-50 via-sage-50 to-primary-50;
+    @apply text-sage-900 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-sage-600 hover:bg-sage-700 text-white px-6 py-3 rounded-2xl;
+    @apply transition-all duration-200 ease-in-out;
+    @apply shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply font-medium text-sm;
+  }
+  
+  .btn-secondary {
+    @apply bg-zen-200 hover:bg-zen-300 text-sage-700 px-6 py-3 rounded-2xl;
+    @apply transition-all duration-200 ease-in-out;
+    @apply shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+    @apply font-medium text-sm;
+  }
+  
+  .card {
+    @apply bg-white/80 backdrop-blur-sm rounded-3xl p-6;
+    @apply shadow-xl border border-white/20;
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-2xl hover:-translate-y-1 hover:bg-white/90;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 rounded-2xl border-2 border-zen-200;
+    @apply focus:border-sage-400 focus:outline-none focus:ring-0;
+    @apply transition-all duration-200 ease-in-out;
+    @apply bg-white/50 backdrop-blur-sm;
+    @apply placeholder-sage-400 text-sage-800;
+  }
+  
+  .floating-card {
+    @apply fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md;
+    @apply border-t border-zen-200 shadow-2xl;
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .nav-item {
+    @apply flex flex-col items-center py-3 px-4;
+    @apply transition-all duration-200 ease-in-out;
+    @apply text-sage-600 hover:text-sage-800;
+  }
+  
+  .nav-item.active {
+    @apply text-sage-800 bg-sage-100/50 rounded-2xl;
+  }
+  
+  .zen-button {
+    @apply bg-white/60 hover:bg-white/80 backdrop-blur-sm;
+    @apply border border-zen-200 hover:border-sage-300;
+    @apply rounded-full p-3 transition-all duration-200;
+    @apply hover:shadow-lg hover:-translate-y-0.5;
+  }
+  
+  .alarm-button {
+    @apply w-20 h-20 rounded-full flex items-center justify-center;
+    @apply text-white font-bold text-lg shadow-2xl;
+    @apply transition-all duration-200 hover:scale-105;
+    @apply active:scale-95;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-sage-600 to-primary-600 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply bg-white/20 backdrop-blur-lg border border-white/30;
+    @apply shadow-xl;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+  
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  .animate-gentle-bounce {
+    animation: gentleBounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(156, 163, 175, 0.8);
+}
+
+/* Calendar customizations */
+.react-calendar {
+  @apply border-none bg-transparent font-sans;
+}
+
+.react-calendar__tile {
+  @apply rounded-xl transition-all duration-200;
+  @apply hover:bg-sage-100/50;
+}
+
+.react-calendar__tile--active {
+  @apply bg-sage-600 text-white;
+}
+
+.react-calendar__tile--now {
+  @apply bg-primary-500 text-white;
+}
+
+/* Notification styles */
+.notification-enter {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.notification-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.notification-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification-exit-active {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 300ms, transform 300ms;
+}
