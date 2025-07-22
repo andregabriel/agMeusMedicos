@@ -6,11 +6,11 @@ import { SendIcon, MicIcon, MicOffIcon } from 'lucide-react';
 interface ChatFooterProps {
   onSendMessage?: (message: string) => void;
   onVoiceToggle?: (isRecording: boolean) => void;
+  isRecording?: boolean;
 }
 
-export default function ChatFooter({ onSendMessage, onVoiceToggle }: ChatFooterProps) {
+export default function ChatFooter({ onSendMessage, onVoiceToggle, isRecording = false }: ChatFooterProps) {
   const [message, setMessage] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
 
   const handleSend = () => {
     if (message.trim() && onSendMessage) {
@@ -28,7 +28,6 @@ export default function ChatFooter({ onSendMessage, onVoiceToggle }: ChatFooterP
 
   const handleVoiceToggle = () => {
     const newRecordingState = !isRecording;
-    setIsRecording(newRecordingState);
     if (onVoiceToggle) {
       onVoiceToggle(newRecordingState);
     }
