@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatTime, formatDateBR, isToday } from '@/utils/dateHelpers';
-import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon } from 'lucide-react';
+import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon, PillIcon } from 'lucide-react';
 import AlarmModal from './AlarmModal';
 import DemoData from './DemoData';
 import { motion } from 'framer-motion';
+import { Medication } from '@/types';
 
 export default function TodayView() {
   const { state, getTodayLogs, getTodaySleep, getMedicationAccuracy } = useApp();
@@ -37,11 +38,11 @@ export default function TodayView() {
     }
   }, [currentTime, state.medications, state.alarm.isActive]);
 
-  const getNextMedication = () => {
+  const getNextMedication = (): (Medication & { time: string }) | null => {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     
-    let nextMed = null;
+    let nextMed: (Medication & { time: string }) | null = null;
     let minDiff = Infinity;
 
     state.medications.forEach(med => {
