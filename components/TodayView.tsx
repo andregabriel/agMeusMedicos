@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatTime, formatDateBR, isToday } from '@/utils/dateHelpers';
 import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon, PillIcon } from 'lucide-react';
@@ -38,8 +38,8 @@ export default function TodayView() {
     }
   }, [currentTime, state.medications, state.alarm.isActive]);
 
-  const getNextMedication = (): (Medication & { time: string }) | null => {
-    const now = new Date();
+  const nextMedication = useMemo((): (Medication & { time: string }) | null => {
+    const now = currentTime;
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     
     let nextMed: (Medication & { time: string }) | null = null;
@@ -63,9 +63,7 @@ export default function TodayView() {
     });
 
     return nextMed;
-  };
-
-  const nextMedication = getNextMedication();
+  }, [currentTime, state.medications]);
 
   const getSleepEmoji = (hours: number) => {
     if (hours >= 8 && hours <= 10) return '😌';

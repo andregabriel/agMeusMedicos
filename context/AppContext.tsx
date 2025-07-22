@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 import { Medication, MedicationLog, SleepRecord, ViewMode, AlarmState } from '@/types';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { formatDate } from '@/utils/dateHelpers';
@@ -123,31 +123,41 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [medications, setMedications] = useLocalStorage<Medication[]>('agsafe-medications', []);
   const [medicationLogs, setMedicationLogs] = useLocalStorage<MedicationLog[]>('agsafe-logs', []);
   const [sleepRecords, setSleepRecords] = useLocalStorage<SleepRecord[]>('agsafe-sleep', []);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  // Load data from localStorage on mount
+  // Load data from localStorage ONLY on mount
   useEffect(() => {
-    dispatch({
-      type: 'LOAD_DATA',
-      payload: {
-        medications,
-        medicationLogs,
-        sleepRecords,
-      },
-    });
-  }, [medications, medicationLogs, sleepRecords]);
+    if (!isInitialized) {
+      dispatch({
+        type: 'LOAD_DATA',
+        payload: {
+          medications,
+          medicationLogs,
+          sleepRecords,
+        },
+      });
+      setIsInitialized(true);
+    }
+  }, [medications, medicationLogs, sleepRecords, isInitialized]);
 
-  // Save to localStorage when state changes
+  // Save to localStorage when state changes (but only after initialization)
   useEffect(() => {
-    setMedications(state.medications);
-  }, [state.medications, setMedications]);
+    if (isInitialized) {
+      setMedications(state.medications);
+    }
+  }, [state.medications, setMedications, isInitialized]);
 
   useEffect(() => {
-    setMedicationLogs(state.medicationLogs);
-  }, [state.medicationLogs, setMedicationLogs]);
+    if (isInitialized) {
+      setMedicationLogs(state.medicationLogs);
+    }
+  }, [state.medicationLogs, setMedicationLogs, isInitialized]);
 
   useEffect(() => {
-    setSleepRecords(state.sleepRecords);
-  }, [state.sleepRecords, setSleepRecords]);
+    if (isInitialized) {
+      setSleepRecords(state.sleepRecords);
+    }
+  }, [state.sleepRecords, setSleepRecords, isInitialized]);
 
   const getMedicationsForTime = (time: string): Medication[] => {
     return state.medications.filter(med => 
