@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: true,
+  compress: true,
+  reactStrictMode: true,
   images: {
-    domains: [],
+    unoptimized: true,
   },
 }
 

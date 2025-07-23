@@ -10,8 +10,6 @@ export const metadata: Metadata = {
   title: 'agSafe - Gerenciador de Medicamentos',
   description: 'Aplicativo inteligente para gerenciamento de medicamentos e sono com comandos de voz',
   manifest: '/manifest.json',
-  themeColor: '#10b981',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -22,6 +20,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  themeColor: '#10b981',
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -30,23 +37,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png" />
-        <link rel="apple-touch-icon" sizes="128x128" href="/icons/icon-128x128.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
-        <link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png" />
-        <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+        <link rel="icon" href="/icons/icon-192x192.png" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="agSafe" />
         <meta name="application-name" content="agSafe" />
-        <meta name="msapplication-TileColor" content="#10b981" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={inter.className}>
         <AppProvider>
