@@ -36,14 +36,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <head>
-        <link rel="icon" href="/icons/icon-192x192.png" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="agSafe" />
-        <meta name="application-name" content="agSafe" />
-      </head>
       <body className={inter.className}>
         <AppProvider>
           {children}

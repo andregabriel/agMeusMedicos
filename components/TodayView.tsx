@@ -6,7 +6,6 @@ import { formatTime, formatDateBR, isToday } from '@/utils/dateHelpers';
 import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon, PillIcon } from 'lucide-react';
 import AlarmModal from './AlarmModal';
 import DemoData from './DemoData';
-import { motion } from 'framer-motion';
 import { Medication } from '@/types';
 
 export default function TodayView() {
@@ -82,11 +81,7 @@ export default function TodayView() {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center space-y-2"
-      >
+      <div className="text-center space-y-2">
         <h1 className="text-3xl font-light gradient-text">
           Olá, boa {currentTime.getHours() < 12 ? 'manhã' : currentTime.getHours() < 18 ? 'tarde' : 'noite'}!
         </h1>
@@ -96,15 +91,11 @@ export default function TodayView() {
         <div className="text-4xl font-light text-sage-800">
           {formatTime(currentTime)}
         </div>
-      </motion.div>
+      </div>
 
       {/* Próximo Medicamento */}
       {nextMedication && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="card card-hover"
-        >
+        <div className="card card-hover">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-sage-400 to-sage-600 flex items-center justify-center">
@@ -118,43 +109,28 @@ export default function TodayView() {
             </div>
             <BellIcon className="text-sage-400 animate-gentle-bounce" size={20} />
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Resumo do Dia */}
       <div className="grid grid-cols-2 gap-4">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1 }}
-          className="card text-center"
-        >
+        <div className="card text-center">
           <div className="text-2xl mb-2">{getAccuracyEmoji(todayAccuracy)}</div>
           <div className="text-2xl font-light text-sage-800">{todayAccuracy}%</div>
           <div className="text-sm text-sage-600">Precisão Remédios</div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-          className="card text-center"
-        >
+        <div className="card text-center">
           <div className="text-2xl mb-2">{todaySleep ? getSleepEmoji(todaySleep.duration / 60) : '💤'}</div>
           <div className="text-2xl font-light text-sage-800">
             {todaySleep ? `${(todaySleep.duration / 60).toFixed(1)}h` : '--'}
           </div>
           <div className="text-sm text-sage-600">Sono Ontem</div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Medicamentos Hoje */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="card"
-      >
+      <div className="card">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-sage-800">Medicamentos Hoje</h2>
           <AlarmCheckIcon className="text-sage-400" size={20} />
@@ -190,16 +166,11 @@ export default function TodayView() {
               ))}
           </div>
         )}
-      </motion.div>
+      </div>
 
       {/* Histórico Recente */}
       {todayLogs.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="card"
-        >
+        <div className="card">
           <h2 className="text-lg font-semibold text-sage-800 mb-4">Tomados Hoje</h2>
           <div className="space-y-2">
             {todayLogs.slice(-3).map(log => {
@@ -217,7 +188,7 @@ export default function TodayView() {
               );
             })}
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Alarm Modal */}
