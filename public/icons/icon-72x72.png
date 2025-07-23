@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#10b981"/>
+  
+  <!-- Pill icon -->
+  <g transform="translate(256 256)">
+    <!-- Pill body -->
+    <ellipse cx="0" cy="0" rx="120" ry="80" fill="white" opacity="0.9"/>
+    
+    <!-- Pill split line -->
+    <rect x="-2" y="-80" width="4" height="160" fill="#10b981"/>
+    
+    <!-- Cross symbol -->
+    <g transform="translate(-80 -60)">
+      <rect x="-4" y="-20" width="8" height="40" fill="#10b981"/>
+      <rect x="-20" y="-4" width="40" height="8" fill="#10b981"/>
+    </g>
+    
+    <!-- Clock symbol -->
+    <g transform="translate(80 60)">
+      <circle cx="0" cy="0" r="25" fill="none" stroke="#10b981" stroke-width="3"/>
+      <line x1="0" y1="0" x2="0" y2="-15" stroke="#10b981" stroke-width="2"/>
+      <line x1="0" y1="0" x2="10" y2="0" stroke="#10b981" stroke-width="2"/>
+    </g>
+  </g>
+  
+  <!-- App name -->
+  <text x="256" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">agSafe</text>
+</svg>

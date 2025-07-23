@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useApp } from '@/context/AppContext';
 import { formatTime, formatDateBR, isToday } from '@/utils/dateHelpers';
 import { PlusIcon, AlarmCheckIcon, BellIcon, SunIcon, MoonIcon, PillIcon } from 'lucide-react';
 import AlarmModal from './AlarmModal';
 import DemoData from './DemoData';
 import { motion } from 'framer-motion';
+import { Medication } from '@/types';
 
 export default function TodayView() {
   const { state, getTodayLogs, getTodaySleep, getMedicationAccuracy } = useApp();
@@ -37,11 +38,11 @@ export default function TodayView() {
     }
   }, [currentTime, state.medications, state.alarm.isActive]);
 
-  const getNextMedication = () => {
-    const now = new Date();
+  const nextMedication = useMemo((): (Medication & { time: string }) | null => {
+    const now = currentTime;
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     
-    let nextMed = null;
+    let nextMed: (Medication & { time: string }) | null = null;
     let minDiff = Infinity;
 
     state.medications.forEach(med => {
@@ -62,9 +63,7 @@ export default function TodayView() {
     });
 
     return nextMed;
-  };
-
-  const nextMedication = getNextMedication();
+  }, [currentTime, state.medications]);
 
   const getSleepEmoji = (hours: number) => {
     if (hours >= 8 && hours <= 10) return '😌';
@@ -81,7 +80,7 @@ export default function TodayView() {
   };
 
   return (
-    <div className="p-6 pb-32 space-y-6">
+    <div className="p-6 space-y-6">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
